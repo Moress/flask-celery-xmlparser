@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  #Redis
+  redis:
+    image: redis:3.2
+
+  #Web app
+  web:
+    build: .
+    command: ./run_web.sh
+    volumes:
+      - .:/app
+    expose:
+      - '5000'
+    links:
+      - redis
+      - celery
+
+  #Celery worker
+  celery:
+    build: .
+    command: ./run_celery.sh
+    volumes:
+      - .:/app
+    links:
+      - redis
+
