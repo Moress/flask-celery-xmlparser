@@ -8,7 +8,6 @@ services:
   #Web app
   web:
     build: .
-    working_dir: /app
     command: ./run_web.sh
     volumes:
       - ./app:/app
@@ -16,12 +15,10 @@ services:
       - '5000'
     links:
       - redis
-      - celery
 
   #Celery worker
   celery:
     build: .
-    working_dir: /app
     command: ./run_celery.sh
     volumes:
       - ./app:/app

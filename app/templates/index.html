@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Async XML Parser</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"
+          integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h3 class="card-header">Загрузка файла</h3>
+            <div class="card-block">
+                <form class="form-inline" action="/upload" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input class="custom-file-input" type="file" name="file_upload" accept="text/xml">
+                    </div>
+                    <button class="btn btn-success" type="submit">Загрузить</button>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <h3 class="card-header">Очередь обработки</h3>
+            <div class="card-block">
+                <table class="table">
+                    <thead>
+                        <th>Дата добавления</th>
+                        <th>Файл</th>
+                        <th>Статус</th>
+                        <th>Обработано узлов</th>
+                        <th>Вес графа</th>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                        <tr {% if task.state != 'SUCCESS' and task.state != 'FAILURE' %}class = "js-row-active"{% endif %} data-id="{{ task.task_id }}" >
+                            <td class="js-row-date-add">{{ task.date_add.strftime("%d.%m.%Y %H:%M:%S") }}</td>
+                            <td class="js-row-filename">{{ task.filename }}</td>
+                            <td class="js-row-state">{{ task.state }}</td>
+                            <td class="js-row-count">{{ task.count }}</td>
+                            <td class="js-row-weight">{{ task.weight }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

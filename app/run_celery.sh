@@ -1,3 +1,3 @@
 #!/bin/sh
 
-#su -m docker-user -c "celery worker -A app.celery"
+su -m docker-user -c "celery worker -A runcelery.celery"
