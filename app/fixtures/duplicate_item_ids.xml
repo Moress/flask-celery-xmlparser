@@ -1,0 +1,15 @@
+<items>
+    <item>
+        <id>1</id>
+    </item>
+    <item>
+        <id>2</id>
+        <parentId>1</parentId>
+    </item>
+    <item>
+        <id>1</id>
+    </item>
+    <item>
+        <id>2</id>
+    </item>
+</items>

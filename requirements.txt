@@ -3,3 +3,4 @@ Celery==4.0.2
 Redis==2.10.5
 Flask-SQLAlchemy==2.2
 Flask-Migrate==2.0.3
+lxml==3.7.2
